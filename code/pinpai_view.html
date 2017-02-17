@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <!-- 这里是品牌列表,与fenlei_view 布局相同,但是接口不同 -->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="author" content="m.178hui.com"/>
+    <meta name="applicable-device" content="mobile"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <title>品牌详情</title>
+    <link href="css/public.css" rel="stylesheet" type="text/css"/>
+    <link href="css/frozen.css" rel="stylesheet" type="text/css">
+    <link href="css/fenlei.css" rel="stylesheet" type="text/css">
+    <link href="css/swiper.min.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<div class="mobile">
+    <!--页面加载 开始-->
+    <div id="preloader">
+        <div id="status">
+            <p class="center-text"><span>拼命加载中···</span></p>
+        </div>
+    </div>
+    <!--页面加载 结束-->
+    <!--header 开始-->
+    <header>
+        <div class="header">
+            <a class="new-a-back" href="fenlei.html">
+                <span><img src="images/iconfont-fanhui.png"></span>
+            </a>
+
+            <h2>品牌详情</h2>
+
+        </div>
+    </header>
+    <!--header 结束-->
+
+    <div class="view w" style="margin-top:40px">
+        <div id="fenlei"></div>
+
+
+        <!-- <a href="baoliao_view.html">
+             <div class="baoliao_content">
+                 <div class="bl_img"><img src="images/jingxuan/dnsm/chanpin-3.png"/></div>
+                 <div class="bl_right">
+                     <div class="bl_title">韩国现代（HYUNDAI) BD-YS2003 多功能养生壶 煎药壶2.0L</div>
+                     <div class="bl_note">手机端：99元包邮</div>
+                     <div class="bl_tag">
+                         <div class="bl_price">￥99.00</div>
+                         <div class="bl_mall">京东商城</div>
+                     </div>
+                 </div>
+             </div>
+         </a>-->
+
+
+        <!-- Swiper -->
+        <div class="swiper-container">
+            <section class="swiper-container">
+                <div class="swiper-wrapper" id="banner">
+                    <!--<div class="swiper-slide swiper-slide-active">
+                        <a href="#">
+                            <img  src="images/jingxuan/dnsm/chanpin-3.png">图一</a>
+                    </div>
+                    <div class="swiper-slide swiper-slide-active">
+                        <a href="#">
+                            <img  src="images/jingxuan/dnsm/chanpin-3.png">图一</a>
+                    </div>
+                    <div class="swiper-slide swiper-slide-active">
+                        <a href="#">
+                            <img  src="images/jingxuan/dnsm/chanpin-3.png">图一</a>
+                    </div>
+                    <div class="swiper-slide swiper-slide-active">
+                        <a href="#">
+                            <img  src="images/jingxuan/dnsm/chanpin-3.png">图一</a>
+                    </div>
+                    <div class="swiper-slide swiper-slide-active">
+                        <a href="#">
+                            <img  src="images/jingxuan/dnsm/chanpin-3.png">图一</a>
+                    </div>
+                    <div class="swiper-slide swiper-slide-active">
+                        <a href="#">
+                            <img  src="images/jingxuan/dnsm/chanpin-3.png">图一</a>
+                    </div>-->
+
+                </div>
+            </section>
+
+
+        </div>
+
+    </div>
+
+
+    <!--<div class="no_login w">您需要登录才能发表牛评哦！<a href="#">马上登录</a><a href="#">免费注册</a></div>-->
+
+
+    <div class="m_user w">
+        <a href="login.html">登录</a>
+        <a href="register.html">注册</a>
+        <a href="#">返回顶部</a>
+    </div>
+    <div class="footer w">
+        <a href="#">
+            <div class="ico_img"><img src="images/178hui-app.png"></div>
+            <span style="color:#00bb9c">客户端</span></a>
+        <a href="index.html">
+            <div class="ico_img"><img src="images/178hui-shouji.png"></div>
+            <span style="color:#eb4f38">触摸版</span></a>
+        <a href="#">
+            <div class="ico_img"><img src="images/178hui-diannao.png"></div>
+            <span>电脑版</span></a>
+    </div>
+    <div class="copyright">Copyright © 2016- 诚品会 版权所有</div>
+
+
+</div>
+<script src="js/jquery-1.8.3.min.js"></script>
+<script src="js/layer.js"></script>
+
+<!-- Swiper JS -->
+
+<!--<script src="js/jquery-1.10.1.min.js"></script>-->
+<script src="js/swiper.min.js"></script>
+
+
+<script>
+    //从本地存储拿到 key
+    var type_key = localStorage.getItem("pinpai_key");
+
+    //分类商品列表
+    $.ajax({
+        type: "get",
+        url: "http://112.17.250.169:8088/index.php/home/Brand/brandList",
+        async: false,
+        cache: false,//在url后面拼接一个随机数清除get缓存
+        data: {
+            userid: localStorage.getItem("userid"),
+            kingkey: localStorage.getItem("kingkey"),
+            type: type_key
+        },
+        dataType: "json",
+        success: function (data) {
+            if (data.status == "100") {
+                //分类详情里面的商品列表
+                var aFenlei = document.getElementById("fenlei");
+                var str = "";
+                for (var i = 0; i < data.result.goodlist.length; i++) {
+                    var cur = data.result.goodlist[i];
+                    str += "<a href='fenlei_pinpai_view.html'>";
+                    str += "<div class='baoliao_content'><div class='bl_img'>";
+                    str += "<img src=" + cur.imgurl + "  /></div>";//
+                    str += "<div class='bl_right'><div class='bl_title'>" + cur.name + "</div>";//
+                    str += "<div class='bl_note'>" + cur.brief + "</div>";
+                    str += "<div class='bl_tag'><div class='bl_price'>￥" + cur.price + "</div>";
+                    str += "<div class='bl_mall'>" + cur.shop + "</div>";
+                    str += "</div></div></div></a>";
+
+                }
+                aFenlei.innerHTML = str;
+                //分类详情里面的商品列表中的猜你喜欢
+
+                var aBanner = document.getElementById("banner");
+                var str = "";
+                for (var i = 0; i < data.result.current.length; i++) {
+                    var cur = data.result.current[i];
+                    str += "<div class='swiper-slide swiper-slide-active'><a href='baoliao_view.html'>";
+                    str += "<img src=" + cur.imgurl + "  />" + cur.name + "</a></div>";//
+                }
+                aBanner.innerHTML = str;
+
+                return true;
+            } else if (data.status == "101") {
+                alert("动态密码错误");
+            } else if (data.status == "105") {
+                alert("没有相关数据");
+            }
+        },
+        error: function (result) {
+            alert(result.status);
+            console.log(result);
+        }
+    })
+
+
+    <!-- Initialize Swiper -->
+    var swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+        slidesPerView: 4,
+        centeredSlides: true,
+        paginationClickable: true,
+        spaceBetween: 30
+    });
+
+
+    $(window).load(function () {
+        $("#status").fadeOut();
+        $("#preloader").delay(350).fadeOut("slow");
+    });
+    //
+
+</script>
+</body>
+</html>

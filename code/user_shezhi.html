@@ -1,0 +1,103 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="author" content="m.178hui.com" />
+<meta name="applicable-device" content="mobile" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<title>设置</title>
+<link href="css/public.css" rel="stylesheet" type="text/css" />
+<link href="css/user.css" rel="stylesheet" type="text/css">
+<script src="js/jquery-1.8.3.min.js"></script>
+<script src="layer/layer.js"></script>
+<script>
+$(window).load(function() {
+	$("#status").fadeOut();
+	$("#preloader").delay(350).fadeOut("slow");
+})
+</script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$(".login_out").click(function(){
+		layer.confirm('您确定要退出吗？',  {skin: 'layui-layer-molv',offset: '30%'}, function(index){
+			layer.close(index);
+			layer.msg('拜拜！下次见！', {shift: 6, time: 1500},function(){
+				window.location='index.html';
+			});
+		});
+	});
+});
+</script>
+
+</head>
+
+<body>
+<div class="mobile" >
+	<!--页面加载 开始-->
+  <div id="preloader">
+    <div id="status">
+      <p class="center-text"><span>拼命加载中···</span></p>
+    </div>
+  </div>
+  <!--页面加载 结束--> 
+  <!--header 开始-->
+  <header>
+    <div class="header"> <a class="new-a-back" href="javascript:history.back();"> <span><img src="images/iconfont-fanhui.png"></span> </a>
+      <h2>设置</h2>
+      </div>
+  </header>
+  <!--header 结束-->
+
+    <div class="user_sz_list w" style="margin-top:40px;">
+    	<ul>
+            <li>
+            	<a href="user_shezhi_mail.html">
+                <div class="u_sz_name">绑定邮箱</div>
+                <div class="nt_icon"></div>
+                <div class="sz_name">绑定</div>
+                
+              </a>
+            </li>
+            <li>
+            	<a href="xiugaimima.html">
+                    <div class="u_sz_name">修改密码</div>
+                    <div class="nt_icon"></div>
+                    <div class="sz_name">修改</div>
+              </a>
+            </li>
+            <li>
+            	<a href="user_shezhi_nicheng.html">
+                    <div class="u_sz_name">修改昵称</div>
+                    <div class="nt_icon"></div>
+                    <div class="sz_name">修改</div>
+              </a>
+            </li>
+            <li>
+              <a href="user_shezhi_sex.html">
+                    <div class="u_sz_name">修改性别</div>
+                    <div class="nt_icon"></div>
+                    <div class="sz_name">修改</div>
+              </a>
+            </li>
+        </ul>
+    </div>
+    <div class="login_out w"><a href="javascript:void(0);" id="user_login_out"><span><img src="images/iconfont-tuichu.png"></span><i>安全退出</i></a></div>
+
+</div>
+
+<script src="js/jquery-1.8.3.min.js"></script>
+<script>
+    //退出登录操作
+    $("#user_login_out").click(function () {
+        // 清除缓存
+        localStorage.clear();
+        alert(localStorage.getItem("userid"))
+        //进入登录界面
+
+        location.href = "denglu.html";
+
+    })
+
+
+</script>
+</body>
+</html>

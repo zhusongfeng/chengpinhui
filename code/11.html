@@ -1,0 +1,208 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>诚品会wap专题</title>
+    <link href="css/owl.carousel.css" rel="stylesheet">
+    <link href="css/public.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="css/ceping.css"/>
+
+</head>
+
+<body style="background-color: #ffffff">
+<div class="mobile">
+    <div class="header">
+        <div class="top-header">
+            <div class="m_search">
+                <a href="#"><img src="images/icon/icon-search58.png" width="20"></a>
+            </div>
+            <div class="m_name">
+                <a href="#">专题</a>
+            </div>
+            <div class="m_news">
+                <a href="#"> <img src="images/icon/icon-news58.png" width="20"></a>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="top w" id="div">
+
+
+        <div class="m_banner">
+            <a href="#" class="item"><img src="images/test-banner2.png"></a>
+
+            <p class="clear">
+                <span class="left">as</span>
+                <span class="centre clear"><i class="one">88</i></span>
+                <span class="right clear"><i>460</i></span>
+            </p>
+        </div>
+
+
+    </div>
+
+
+    <div class="copyright">Copyright © 2016- 诚品会 版权所有</div>
+    <div class="gotop backtop" style="display:none;"></div>
+    <!--返回顶部-->
+
+
+    <div class="uder-nav">
+        <ul>
+            <li id="cph">
+                <div class="cph1"><a href="#">诚品会</a></div>
+            </li>
+            <li id="fl">
+                <div class="fl1"><a href="#">分类</a></div>
+            </li>
+            <li id="cp">
+                <div class="cp1"><a href="#">测评</a></div>
+            </li>
+            <li id="zt">
+                <div class="zt1"><a href="#">专题</a></div>
+            </li>
+            <li id="wd">
+                <div class="wd1"><a href="#">我的</a></div>
+            </li>
+        </ul>
+    </div>
+
+</div>
+<!--end//Mobil-->
+<script src="./js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript">
+    //返回顶部
+    $(document).ready(function () {
+        $(window).scroll(function () {
+            var scrollHeight = $(document).height();
+            var scrollTop = $(window).scrollTop();
+            var $windowHeight = $(window).innerHeight();
+            scrollTop > 75 ? $(".gotop").fadeIn(200).css("display", "block") : $(".gotop").fadeOut(200).css({"background-image": "url(images/iconfont-fanhuidingbu.png)"});
+        });
+        $('.backtop').click(function (e) {
+            $(".gotop").css({"background-image": "url(images/iconfont-fanhuidingbu_up.png)"});
+            e.preventDefault();
+            $('html,body').animate({scrollTop: 0});
+        });
+    });
+    window.onload = function () {
+        //绑定滚动事件
+
+        $.ajax({
+            type: "get",
+            url: "http://112.17.250.169:8088/index.php/home/newslist/newsList",
+            async: true,
+            //cache:false,//在url后面拼接一个随机数清除get缓存
+            data: {
+                userid: 125,
+                kingkey: 'fe4024de1472fa78450b7a9e16abe16d'
+                /* firstid:firstid,
+                 page:page*/
+            },
+            dataType: "json",
+            success: function (data) {
+                if (data.status == "100") {
+                    alert(data.status);
+                    console.log(data.result);
+                    var aDiv = document.getElementById("div");
+
+                    //var imgList = aDiv.getElementsByTagName("img");
+                    //->1.数据绑定:把数据绑定在页面上
+                    //var sourceNode = document.getElementsByClassName("top w"); // 获得被克隆的节点对象
+                    //定义全局变量，以便后面调用
+                    /* for(var i=0;i<10;i++) {
+                     aa=data.result[i]["eid"]
+                     //console.log(data.result[i]["eid"]);
+                     }*/
+
+                    var str = "";
+                    for (var i = 0; i < 10; i++) {
+                        var cur = data.result[i];
+                        str += "<div class='m_banner'>";
+                        str += "<a href='#' class='item'><img src=" + cur.imgurl + "  trueImg=" + cur.images + "/></a>";//logo  图片
+                        str += "<p ><span class='left' >" + cur.title + "</span><span class='right' id='click'><i>" + cur.likenum + "</i></span></p>";
+                        str += "</div>";
+                        var aa = cur["eid"];
+                    }
+                    aDiv.innerHTML = str;
+                    //测评点赞接口
+                    /*    $("#click").live("click",function(){
+                     $.ajax({
+                     type: "get",
+                     url: "{:U('Evaluationlike/evaluationLike')}",
+                     data:{
+                     userid:58,
+                     kingkey:'d683c8f14bed7d6d913f2b6f33e086c3',
+                     evaluation_id: aa
+
+                     },
+                     async: true,
+                     cache:false,//在url后面拼接一个随机数清除get缓存
+                     dataType: "json",
+                     success: function (data) {
+                     console.log(i);
+                     if(data.status=="101"){
+                     alert("动态密码错误");
+                     return true;
+                     }else if(data.status == "106"){
+                     alert("点赞成功");
+                     return true;
+                     }else if(data.status =="107"){
+                     alert("取消点赞成功");
+                     return true;
+                     }else if(data.status == "108"){
+                     alert("点赞失败");
+                     return true;
+                     }else if(data.status == "109"){
+                     alert("取消点赞失败");
+                     return true;
+                     }
+                     },
+                     error: function (result) {
+                     alert(11);
+                     console.log(result);
+                     }
+                     })
+                     });*/
+
+                } else if (data.status == "101") {
+                    alert("动态密码错误");
+                    return true;
+                } else if (data.status == "102") {
+                    alert("请求下一页成功");
+                    return true;
+                } else if (data.status == "103") {
+                    alert("没有最新数据");
+                    return true;
+                } else if (data.status == "104") {
+                    alert("没有下一页");
+                    return true;
+                }
+            },
+            error: function (result) {
+                alert(result.status);
+                console.log(result);
+            }
+        });
+        //测评点赞接口
+//适应屏幕大小
+        ~function (desW) {
+            var winW = document.documentElement.clientWidth,
+                    n = winW / desW,
+                    oMain = document.getElementById("main");
+            if (winW > desW) {
+                oMain.style.width = desW + "px";
+                return;
+            }
+            document.documentElement.style.fontSize = n * 100 + "px";
+        }(720);
+
+    };
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="author" content="m.178hui.com"/>
+    <meta name="applicable-device" content="mobile"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <title>我的优惠券</title>
+    <link href="css/public.css" rel="stylesheet" type="text/css"/>
+    <link href="css/user.css" rel="stylesheet" type="text/css"/>
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script>
+        $(window).load(function () {
+            $("#status").fadeOut();
+            $("#preloader").delay(350).fadeOut("slow");
+        })
+    </script>
+</head>
+
+<body>
+<div class="mobile">
+    <!--页面加载 开始-->
+    <div id="preloader">
+        <div id="status">
+            <p class="center-text"><span>拼命加载中···</span></p>
+        </div>
+    </div>
+    <!--页面加载 结束-->
+    <!--header 开始-->
+    <header>
+        <div class="header"><a class="new-a-back" href="javascript:history.back();"> <span><img
+                src="images/iconfont-fanhui.png"></span> </a>
+
+            <h2>我的优惠券</h2>
+        </div>
+    </header>
+    <!--header 结束-->
+
+    <!--中部数据滚动区域-->
+    <div class="u_yhq w">
+        <div class="yhq_list" id="div">
+
+
+        </div>
+
+    </div>
+</div>
+
+<!--请求数据的JS-->
+<script src="js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript">
+
+    $.ajax({
+        type: "get",
+        url: "http://112.17.250.169:8088/index.php/home/Coupon/coupon",
+        async: false,
+        cache: false,//在url后面拼接一个随机数清除get缓存
+        data: {
+            userid: localStorage.getItem("userid"),
+            kingkey: localStorage.getItem("kingkey"),
+        },
+        dataType: "json",
+        success: function (data) {
+            /*aa=data.result.eid;*/
+            if (data.status == "100") {
+                var aDiv = document.getElementById("div");
+                var str = "";
+                for (var i = 0; i < data.result.length; i++) {
+                    var cur = data.result[i];
+                    data.result[i].index = i;
+                    str += "<div class='yhq'>";
+                    str += "<div class='yhq_logos'><img src= " + cur.imgurl + " /></div>";//logo 图片
+                    str += "<div class='yhq_yhq'>" + cur.about + "</div>";
+                    str += "<div class='yhq_button'><a href=" + cur.url + ">可领取</a></div>";//logo  图片
+                    str += "</div>";
+                }
+                ;
+                aDiv.innerHTML = str;
+            } else if (data.status == "101") {
+                alert("动态密码错误");
+                return true;
+            }
+        },
+        error: function (result) {
+            alert(result.status);
+            console.log(result);
+        }
+    });
+</script>
+
+</body>
+</html>

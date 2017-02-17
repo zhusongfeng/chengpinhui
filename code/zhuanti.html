@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>诚品会wap专题</title>
+    <link href="css/owl.carousel.css" rel="stylesheet">
+    <link href="css/public.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="css/zhuanti.css"/>
+
+</head>
+
+<body style="background-color: #ffffff">
+<div class="mobile">
+    <div class="header">
+        <div class="top-header">
+            <div class="m_search">
+                <a href="#"><img src="images/icon/icon-search58.png" width="20"></a>
+            </div>
+            <div class="m_name">
+                <a href="#">专题</a>
+            </div>
+            <div class="m_news">
+                <a href="#"> <img src="images/icon/icon-news58.png" width="20"></a>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="top w" id="div">
+        <!--<div class="m_banner" >
+            <a href="#" class="item"><img src="__PUBLIC__/images/test-banner2.png"></a>
+            <p class="clear">
+                <span class="left">as</span>
+                <span class="centre clear"><i class="one">88</i></span>
+                <span class="right clear"><i>460</i></span>
+            </p>-->
+    </div>
+</div>
+
+<div class="copyright">Copyright © 2016- 诚品会 版权所有</div>
+<div class="gotop backtop" style="display:none;"></div>
+<!--返回顶部-->
+
+
+<div class="uder-nav">
+    <ul>
+        <li id="cph">
+            <div class="cph1"><a href="index.html">诚品会</a></div>
+        </li>
+        <li id="fl">
+            <div class="fl1"><a href="fenlei.html">分类</a></div>
+        </li>
+        <li id="cp">
+            <div class="cp1"><a href="ceping.html">测评</a></div>
+        </li>
+        <li id="zt">
+            <div class="zt1"><a href="#">专题</a></div>
+        </li>
+        <li id="wd">
+            <div class="wd1"><a href="user.html">我的</a></div>
+        </li>
+    </ul>
+</div>
+
+</div><!--end//Mobil-->
+<script src="js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript">
+    //跳转到对应详情页面
+    function setEvent() {
+        // var aDiv=document.getElementById('div');
+        var aa = document.getElementsByClassName('m_banner');
+        for (var i = 0; i < aa.length; i++) {
+            var cur = aa[i];
+            cur.addEventListener('click', handleMouse);
+        }
+    }
+
+    function handleMouse(event) {
+        var doc = event.target;
+        // console.log(doc);
+        if (doc.getAttribute("class") != "m_banner") {
+            doc = doc.parentNode;
+            // console.log(doc.getAttribute("class"));
+            if (doc.getAttribute("class") != "m_banner") {
+                doc = doc.parentNode;
+                // console.log(doc.getAttribute("class"));
+                if (doc.getAttribute("class") != "m_banner") {
+                    doc = doc.parentNode;
+                    console.log(doc.getAttribute("class"));
+                }
+            }
+        }
+
+        doc = doc.lastChild;
+        doc = doc.lastChild;
+        console.log(doc.getAttribute("value"));
+        var id = doc.getAttribute("value");
+        alert(id);
+        localStorage.setItem("ztid", id);
+        //跳转
+        location.href = "zhuanti_view.html";
+    }
+    //专题列表
+    function ztlist(page) {
+        //请求接口
+        $.ajax({
+            type: "get",
+            url: "http://112.17.250.169:8088/index.php/home/newslist/newsList",
+            async: false,
+            cache: false,//在url后面拼接一个随机数清除get缓存
+            data: {
+                kingkey: localStorage.getItem("kingkey"),
+                userid: localStorage.getItem("userid"),
+                page: page
+            },
+            dataType: "json",
+            success: function (data) {
+                //数据信息
+                function information() {
+                    //存储数据
+                    var aDiv = document.getElementById("div");
+                    var str = "";
+                    var list = [];
+                    if (page) {
+                        //如果页数不为空,就拿,然后拼接
+                        str = aDiv.innerHTML;
+                        //如果不为空,说明本地数组不为空,就拿出来追加
+                        var strList = localStorage.getItem("user_zhuanti_list");
+                        list = JSON.parse(strList);
+                    }
+                    list = list.concat(data.result);
+                    var strList = JSON.stringify(list);//转化成字符串进行保存
+                    localStorage.setItem("user_zhuanti_list", strList);
+                    console.log(list.length);
+                    for (var i = 0; i < data.result.length; i++) {
+                        var cur = data.result[i];
+                        str += "<div class='m_banner'>";
+                        str += "<a href='#' class='item'><img src=" + cur.imgurl + "  trueImg=" + cur.images + "/></a>";//logo  图片
+                        str += "<p class='clear'><span class='left' >" + cur.title + "</span>" +
+                                "<span class='centre clear' ><i class='one'>" + cur.commentnum + "</i></span>" +
+                                "<span class='right clear'  value=' " + (cur.zxid) + " ' ><i id='jia' >" + cur.likenum + "</i></span>" +
+                                "</p>";
+                        str += "</div>";
+                    }
+                    aDiv.innerHTML = str;
+                    setEvent();
+                }
+
+                if (data.status == "100") {
+                    information()
+                } else if (data.status == "101") {
+                    alert("动态密码错误");
+                    return true;
+                } else if (data.status == "102") {
+                    information()
+                    return true;
+                } else if (data.status == "103") {
+                    alert("没有最新数据");
+                    return true;
+                } else if (data.status == "104") {
+                    alert("没有下一页");
+                    return true;
+                }
+            },
+            error: function (result) {
+                alert(result.status);
+                console.log(result);
+            }
+        });
+    }
+
+
+    //返回顶部
+    $(document).ready(function () {
+        $(window).scroll(function () {
+            var scrollHeight = $(document).height();//总体高度
+            var scrollTop = $(window).scrollTop();//滚动,顶部距离顶部高度
+            var windowHeight = $(window).innerHeight();//屏幕高度
+            var scrollBtm = scrollTop + windowHeight;//滚动,底部距离顶部高度
+            //底部导航栏 高度 50px
+            var divHeight = $("#div").innerHeight();//滚动部分的总体高度
+
+            //console.log(scrollHeight, windowHeight, divHeight + 50, scrollBtm);
+
+            if (scrollBtm >= scrollHeight) {
+                //拿到最后一个ID
+                var strList = localStorage.getItem("user_zhuanti_list");
+                var list = JSON.parse(strList);
+                //请求下一页
+                ztlist(list[list.length - 1].zxid);
+            }
+            scrollTop > 75 ? $(".gotop").fadeIn(200).css("display", "block") : $(".gotop").fadeOut(200).css({"background-image": "url(images/iconfont-fanhuidingbu.png)"});
+        });
+
+        $('.backtop').click(function (e) {
+            $(".gotop").css({"background-image": "url(images/iconfont-fanhuidingbu_up.png)"});
+            e.preventDefault();
+            $('html,body').animate({scrollTop: 0});
+        });
+    });
+
+    window.onload = function () {
+        //请求接口
+        ztlist();
+    };
+
+    //专题页面点赞接口
+    $("#div .right").live("click", function () {
+        $.ajax({
+            type: "get",
+            url: "http://112.17.250.169:8088/index.php/home/Newslike/like",
+            data: {
+                userid: localStorage.getItem("userid"),
+                kingkey: localStorage.getItem("kingkey"),
+                news_id: $(this).attr('value')
+            },
+            async: false,
+            cache: false,//在url后面拼接一个随机数清除get缓存
+            dataType: "json",
+            success: function (data) {
+                console.log(data)
+                if (data.status == "101") {
+                    alert("动态密码错误");
+                    return true;
+                } else if (data.status == "106") {
+                    ztlist();
+                    //alert("点赞成功");
+                    return true;
+                } else if (data.status == "107") {
+                    ztlist();
+                    //alert("取消点赞成功");
+                    return true;
+                } else if (data.status == "108") {
+
+                    alert("点赞失败");
+                    return true;
+                } else if (data.status == "109") {
+                    alert("取消点赞失败");
+                    return true;
+                }
+            },
+            error: function (result) {
+                alert(11);
+                console.log(result);
+            }
+        })
+    });
+
+
+</script>
+</body>
+</html>

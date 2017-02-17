@@ -1,0 +1,180 @@
+@charset "utf-8";
+/* CSS Document */
+.clear{
+	display: block;
+	content: "";
+	clear: both;
+}
+.header {
+	height: 48px;
+	width: 100%;
+	background: #fe605f;
+	position: fixed;
+	z-index: 2000;
+}
+.header h2{
+	height: 48px;
+	line-height: 48px;
+	text-align: center;
+}
+.w{
+	background-color: #FFFFFF;
+	float: left;
+	min-width: 320px;
+	width: 100%;
+	margin-top: 8%;
+	margin-bottom: -8%;
+}
+
+.news_index .ui-list a li {
+	float: left;
+	width: 100%;
+	margin-top: 10px;
+	border-bottom: 1px  dashed #CCCCCC;
+	/*padding-bottom: 10px;*/
+}
+
+.news_index .ui-list a li.me{
+	margin-top: 40px;
+}
+.list_left {
+	float: left;
+}
+.ui-border-t {
+	padding-top: 20px;
+}
+.ui-list-info h4 {
+	line-height: 30px;
+	height: 30px;
+	font-size: 16px;
+	color: #000;
+}
+.ui-list-info {
+  display: block;
+}
+.ui-list-info .ui-badge {
+	position: relative;
+	float: right;
+	top: 50%;
+	margin-top: -25px;
+	z-index: 5;
+
+}
+.ui-border-s {
+	padding-top: 10px;
+}
+.ui-list-info .times {
+	position: relative;
+	float: right;
+	margin-top: -45px;
+	margin-right: 10px;
+	color: #D1D1D1;
+}
+/* ----------------------------消息详情页---------------------------------- */
+.xiaoxi_content{
+	float: left;
+	width: 100%;
+	border-bottom: 1px solid #F2F2F2;
+	margin-top: 23px;
+	height: 60px;
+
+}
+.xiaoxi_content  .xx_img {
+	float: left;
+	margin: 0 5px 1px 11px;
+	width: 10%;
+
+}
+.xiaoxi_content .xx_img img {
+	width: 50px;
+	z-index: 100;
+	background-size: 20px;
+}
+.xiaoxi_content .xx_right {
+	float: left;
+	margin-left: 10px;
+	width: 75%;
+}
+
+.xiaoxi_content .xx_user {
+	float: left;
+	font-size:1em;
+	color: #666666;
+	line-height: normal;
+	width: 100%;
+}
+.xiaoxi_content .xx_time {
+	float: left;
+	font-size: 0.8em;
+	line-height: normal;
+	color: #000;
+	margin-top: 5px;
+	width: 100%;
+}
+.xiaoxi_content .xx_nr{
+	float: left;
+	width: 100%;
+	height: auto;
+	font-size:1.2em;
+	color: #666666;
+
+}
+.boxb .xx_zznr{
+	width: 100%;
+	clear: both;
+	display: block;
+	content: "";
+
+}
+.boxb .xx_zznr .boxme {
+	float: left;
+	width: 97%;
+	height: 50px;
+	padding-left: 12px;
+	background-color: #f1f1f1;
+	margin-top: 10px;
+
+}
+.xx_zznr_left{
+	float: left;
+	width: 20%;
+	margin-left: 10px;
+}
+.xx_zznr_left .xx_img {
+	float: left;
+	width: 90%;
+	height: 54px;
+}
+.xx_zznr_left .xx_img img {
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	z-index: 100;
+	background-size: 20px;
+}
+.xx_zznr .xx_zznr_info {
+	float: left;
+	margin-left: 10px;
+	width: 75%;
+	margin-top: -8px;
+}
+
+.xx_zznr .xx_user {
+	float: left;
+	font-size:1em;
+	color: #666666;
+	line-height: normal;
+	width: 100%;
+}
+.xx_zznr .xx_nrr {
+	float: left;
+	font-size: 0.9em;
+	color: #666666;
+	width: 100%;
+}
+.boxb{
+	clear: both;
+	display: block;
+	content: "";
+
+}

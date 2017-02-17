@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>设置-修改密码</title>
+    <link href="css/owl.carousel.css" rel="stylesheet">
+    <link href="css/public.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="css/zhuce.css"/>
+
+</head>
+
+<body style="background-color:#F6F6F6">
+<div class="mobile">
+    <div class="header">
+        <div class="top-header">
+            <div class="m_search">
+                <a href="user_shezhi.html"><img src="images/iconfont-fanhui.png" width="20"></a>
+            </div>
+            <div class="m_name">
+                <a href="#">修改密码</a>
+            </div>
+            <!--<div class="m_news">
+                <a href="#"> <img src="images/icon/icon-news58.png" width="20"></a>
+            </div>-->
+        </div>
+    </div>
+
+
+    <div class="top w">
+        <div class="m_banner" >
+            <input type="phone" placeholder="| 手机号："class="log_form_phone"><br>
+
+            <input type="password" placeholder="| 验证码" class="log_form_psd">
+            <i class="pass">点击获取验证码</i>
+            <br>
+            <input type="password" placeholder="| 密码（大于6位的数字和字母）" class="log_form_psd1">
+            <i class="passa"></i>
+            <br>
+
+            <a href="" class="log_form_btn">注册</a>
+
+
+        </div>
+
+
+
+
+
+
+    </div><!--end//top w-->
+
+
+
+</div><!--end//Mobil-->
+</body>
+</html>
+<script type="text/javascript">
+    //返回顶部
+    $(document).ready(function(){
+        $(window).scroll(function () {
+            var scrollHeight = $(document).height();
+            var scrollTop = $(window).scrollTop();
+            var $windowHeight = $(window).innerHeight();
+            scrollTop > 75 ? $(".gotop").fadeIn(200).css("display","block") : $(".gotop").fadeOut(200).css({"background-image":"url(images/iconfont-fanhuidingbu.png)"});
+        });
+        $('.backtop').click(function (e) {
+            $(".gotop").css({"background-image":"url(images/iconfont-fanhuidingbu_up.png)"});
+            e.preventDefault();
+            $('html,body').animate({ scrollTop:0});
+        });
+    });
+
+
+
+
+
+</script>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="author" content="m.178hui.com"/>
+    <meta name="applicable-device" content="mobile"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <title>会员中心</title>
+    <link href="css/public.css" rel="stylesheet" type="text/css"/>
+    <link href="css/user.css" rel="stylesheet" type="text/css">
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="layer/layer.js"></script>
+    <script>
+        $(window).load(function () {
+            $("#status").fadeOut();
+            $("#preloader").delay(350).fadeOut("slow");
+        })
+    </script>
+
+
+</head>
+
+<body>
+<div class="mobile">
+    <!--页面加载 开始-->
+    <div id="preloader">
+        <div id="status">
+            <p class="center-text"><span>拼命加载中···</span></p>
+        </div>
+    </div>
+    <!--页面加载 结束-->
+    <!--header 开始-->
+    <div class="header">
+        <div class="top-header">
+            <div class="m_search">
+                <a href="sousuo.html"><img src="images/icon/icon-search58.png" width="20"></a>
+            </div>
+            <div class="m_name">
+                <a href="#">个人中心</a>
+            </div>
+            <div class="m_news">
+                <a href="#"> <img src="images/icon/icon-news58.png" width="20"></a>
+            </div>
+        </div>
+    </div>
+    <!--header 结束-->
+
+    <div class="user_top w">
+        <div class="user_logo">
+            <div class="img"><img id="user_logo" src="images/user_logo.jpg"></div>
+        </div>
+        <div class="user_info">
+            <div class="user_name">wcxxxxxxx</div>
+        </div>
+    </div>
+    <div class="user_nav_list w">
+        <ul>
+            <li>
+                <a href="user_ceping.html">
+                    <div class="u_nav_icon ceping"></div>
+                    <div class="u_nav_name">我的测评</div>
+                    <div class="nt_icon"></div>
+                </a>
+            </li>
+            <li>
+                <a href="user_shoucang.html">
+                    <div class="u_nav_icon shoucang"></div>
+                    <div class="u_nav_name">我的收藏</div>
+                    <div class="nt_icon"></div>
+                </a>
+            </li>
+            <li>
+                <a href="user_youhuiquan.html">
+                    <div class="u_nav_icon youhuiquan"></div>
+                    <div class="u_nav_name">我的优惠券</div>
+                    <div class="nt_icon"></div>
+                </a>
+            </li>
+
+
+        </ul>
+    </div>
+
+    <div class="user_nav_list w">
+        <ul>
+            <li>
+                <a href="user_shezhi.html">
+                    <div class="u_nav_icon shezhi"></div>
+                    <div class="u_nav_name">设置</div>
+                    <div class="nt_icon"></div>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!--底部导航-->
+    <div class="uder-nav">
+        <ul>
+            <li id="cph">
+                <div class="cph1"><a href="index.html">诚品会</a></div>
+            </li>
+            <li id="fl">
+                <div class="fl1"><a href="fenlei.html">分类</a></div>
+            </li>
+            <li id="cp">
+                <div class="cp1"><a href="ceping.html">测评</a></div>
+            </li>
+            <li id="zt">
+                <div class="zt1"><a href="zhuanti.html">专题</a></div>
+            </li>
+            <li id="wd">
+                <div class="wd1"><a href="#">我的</a></div>
+            </li>
+        </ul>
+    </div>
+    <!--end//底部导航-->
+</div>
+<script src="js/jquery-1.8.3.min.js"></script>
+<script>
+    //修改昵称和头像
+    $("div.user_name").text(localStorage.getItem("name"));
+    //修改头像
+
+    var exp = localStorage.getItem("imgurl");
+    if (exp && typeof(exp) != "undefined") {
+        $("#user_logo").attr('src', localStorage.getItem("imgurl"));
+    }
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,160 @@
+@charset "utf-8";
+/*--顶部--*/
+.header .top-header .m_search {
+    float: left;
+    height: 25px;
+    margin-top: 8px;
+    margin-left: 15px;
+}
+
+.header .top-header .m_name {
+    text-align: center;
+    font-size: 1.5em;
+    text-decoration: none;
+    margin-right: 15px;
+    margin-top: 5px;
+
+}
+
+.header .top-header .m_name a {
+    text-align: center;
+    vertical-align: middle;
+    color: #fff;
+    font-size: 0.8em;
+    text-decoration: none;
+}
+
+.header .top-header .m_name img {
+    float: right;
+    margin-top: 5px;
+    padding-left: 100px;
+}
+
+.header .top-header .m_news {
+    text-align: right;
+    margin-top: -22px;
+    margin-right: 15px;
+}
+
+/*--end//顶部--*/
+.clear:before, .clear:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.top {
+    margin-top: 8%;
+    margin-bottom: 33px;
+    margin-left: -5px;
+    width: 100%;
+    min-width: 320px;
+}
+
+.top .m_banner {
+    width: 100%;
+    max-width: 640px;
+    max-height: 310px;
+    overflow: hidden;
+    background-size: contain;
+    margin-top: 40px;
+    margin-bottom: -250px;
+}
+ .log_form_phone, .log_form_psd, .log_form_psd1 {
+    width: 90%;
+    height: 38px;
+    border: 1px solid #d8d9dc;
+    padding-left: 30px;
+    line-height: 30px;
+    margin-left: 9px;
+    background-color: white;
+    font-size: 16px;
+    outline: none;
+     margin-bottom: 10px ;
+}
+.log_form_phone {
+    background: #fff url(../images/icon/iocn_phonel.png) no-repeat 5px center  ;
+    margin-bottom: 5px;
+    background-size: 25px;
+}
+.log_form_phone:hover{
+    background: #fff url(../images/icon/iocn_phone.png) no-repeat 5px center  ;
+    margin-bottom: 5px;
+    background-size: 25px;
+}
+.log_form_psd {
+    background: #fff url(../images/icon/iocn_code.png) no-repeat 5px center;
+    background-size: 25px;
+    margin-bottom: -5px;
+}
+.log_form_psd:hover{
+    background: #fff url(../images/icon/iocn_codel.png) no-repeat 5px center;
+    background-size: 25px;
+}
+
+.log_form_psd1 {
+    background: #fff url(../images/icon/iocn_key.png) no-repeat 5px center;
+    margin-bottom: 10px ;
+    background-size: 25px;
+}
+.log_form_psd1:hover{
+    background: #fff url(../images/icon/iocn_keyl.png) no-repeat 5px center;
+    background-size: 25px;
+
+}
+.passa:hover{
+    background: #fff url(../images/icon/icon-yan1.png) no-repeat 5px center;
+    background-size: 25px;
+}
+.log_form_checkbox {
+    display: inline-block;
+    padding: 0 20px;
+    margin: 20px 0;
+}
+.log_form_btn {
+    display: block;
+    width: 280px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    color: #fff;
+    background: red;
+    font-size: 20px;
+    letter-spacing: 10px;
+    margin: auto;
+    border-radius: 5px;
+    text-decoration: none;
+}
+.pass{
+    display: inline-block;
+    width: 140px;
+    height: 25px;
+    float: right;
+    position: relative;
+    right: 6px;
+    bottom: 28px;
+    background: red;
+    text-align: center;
+    font-size: 14px;
+    color: #ffffff;
+    border-radius: 5px;
+    line-height: 25px;
+    font-style: normal;
+    cursor: pointer;
+}
+.passa{
+    background: #fff url(../images/icon/icon-yan.png) no-repeat 5px center;
+    background-size: 25px;
+    display: inline-block;
+    width: 40px;
+    height: 38px;
+    float: right;
+    position: relative;
+    right: 16px;
+    bottom: 50px;
+    cursor: pointer;
+}
+
+.log_form_psd1{
+   margin-top: -20px;
+}

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>设置-修改昵称</title>
+    <link href="css/owl.carousel.css" rel="stylesheet">
+    <link href="css/public.css" rel="stylesheet" type="text/css" />
+    <link href="css/user.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body style="background-color:#F6F6F6">
+<div class="mobile">
+    <!--顶部导航栏-->
+  <header>
+    <div class="header"> <a class="new-a-back" href="javascript:history.back();"> <span><img src="images/iconfont-fanhui.png"></span> </a>
+      <h2>修改昵称</h2>
+      </div>
+  </header>
+
+    <!--中部详情-->
+    <div class="top w">
+        <div class="sz_xxsz" >
+            <input type="nicheng" placeholder="请输入您的新昵称："class="log_form_nicheng" id="log_form_nicheng"><br>
+            <a href="javascript:void 0" class="log_form_btn">提交</a>
+        </div>
+
+    </div><!--end//top w-->
+
+</div><!--end//Mobil-->
+<!--底部请求脚本-->
+<script src="js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript">
+    //返回顶部
+    $(document).ready(function(){
+        $(window).scroll(function () {
+            var scrollHeight = $(document).height();
+            var scrollTop = $(window).scrollTop();
+            var $windowHeight = $(window).innerHeight();
+            scrollTop > 75 ? $(".gotop").fadeIn(200).css("display","block") : $(".gotop").fadeOut(200).css({"background-image":"url(images/iconfont-fanhuidingbu.png)"});
+        });
+        $('.backtop').click(function (e) {
+            $(".gotop").css({"background-image":"url(images/iconfont-fanhuidingbu_up.png)"});
+            e.preventDefault();
+            $('html,body').animate({ scrollTop:0});
+        });
+    });
+
+    //提交昵称
+    $(".log_form_btn").click(function(){
+        $.ajax({
+            type: "post",
+            url: "http://112.17.250.169:8088/index.php/home/Personage/up",
+            data:{
+                userid:localStorage.getItem("userid"),
+                kingkey:localStorage.getItem("kingkey"),
+                name:$("#log_form_nicheng").val(),
+            },
+            async: false,
+            cache:false,//在url后面拼接一个随机数清除get缓存
+            dataType: "json",
+            success: function (data) {
+                // console.log($(".right").attr("value"));
+                if(data.status=="400"){
+                    alert("修改成功");
+                    return true;
+                }else if(data.status == "101"){
+
+                    alert("动态密码错误");
+                    return true;
+                }else if(data.status =="401"){
+                    alert("绑定失败");
+                    return true;
+                }else if(data.status == "402"){
+                    alert("昵称已被注册");
+                    return true;
+                }
+            },
+            error: function (result) {
+                alert(11);
+                console.log(result);
+            }
+        })
+    })
+
+
+</script>
+</body>
+</html>
+

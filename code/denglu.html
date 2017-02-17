@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>诚品会wap登入</title>
+    <link href="css/owl.carousel.css" rel="stylesheet">
+    <link href="css/public.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="css/denglu.css"/>
+
+</head>
+
+<body style="background-color: #F6F6F6">
+<div class="mobile">
+    <div class="header">
+        <div class="top-header">
+            <div class="m_name">
+                <a href="#">登入</a>
+            </div>
+            <div class="m_news">
+                <a href="zhuce.html">注册</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="top w">
+        <div class="m_banner">
+            <form target="_blank" id="ff" name="account" method="post">
+                <input type="text" placeholder="| 手机号：" class="log_form_phone" name="account" id="account">
+                <i class="password" name="password">账号</i><br>
+                <input type="password" placeholder="| 密码（大于6位的数字和字母）" name="password" class="log_form_psd1"
+                       id="password"> <i class="phonePassword">密码</i>
+                <i class="passa"></i><br>
+                <!--<input type="text" placeholder="| 地址" class="log_form_psd1" name ="address" id="address"> <i
+                    class="phonePassword">地址</i>-->
+                <!--<i class="passa"></i>-->
+                <br>
+                <!--<input type="submit" value="登录" class="log_form_btn" id="log_form_btn"/>-->
+                <a href="javascript:void 0"
+                   class="log_form_btn" id="log_form_btn">登录</a>
+
+                <p>
+                    <a href="wangjimima.html">忘记密码</a>
+                </p>
+            </form>
+        </div>
+
+    </div>
+
+    <div class="bottom">
+        <input type="radio" value="单选" id="checked"/>
+        已阅读并同意 <i class="write"><u>软件许可服务协议</u></i>
+    </div>
+
+
+</div>
+
+
+<script src="js/jquery-1.8.3.min.js"></script>
+<script src="js/jquery-1.11.3.js"></script>
+<script src="js/css.js"></script>
+<script type="text/javascript">
+
+    window.onload = function () {
+        $("#log_form_btn").click(function () {
+            var account = $('#account').val();
+            var password = $('#password').val();
+            var address = $('#address').val();
+            if ($('#checked').prop('checked')) {
+                $.ajax({
+                    type: "post",
+                    url: "http://112.17.250.169:8088/index.php/home/Title/login",
+                    // async: false,
+                    data: {
+                        account: account,
+                        password: password,
+                        address: address
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.status == "201") {
+                            alert("登录成功", data.result.userid, data.result.kingkey);
+                            // console.log("登录成功",data.result.userid,data.result.kingkey);
+                            location.href = "index.html";
+                            localStorage.setItem("userid", data.result.userid);
+                            localStorage.setItem("kingkey", data.result.kingkey);
+                            localStorage.setItem("name", data.result.name);
+                            localStorage.setItem("imgurl", data.result.imgurl);
+                            localStorage.setItem("email", data.result.email);
+                            localStorage.setItem("gender", data.result.gender);
+                            return true;
+                        } else if (data.status == "204") {
+                            //alert("异地登录成功");
+                            localStorage.setItem("userid", data.result.userid);
+                            localStorage.setItem("kingkey", data.result.kingkey);
+                            localStorage.setItem("name", data.result.name);
+                            localStorage.setItem("imgurl", data.result.imgurl);
+                            localStorage.setItem("email", data.result.email);
+                            localStorage.setItem("gender", data.result.gender);
+                            location.href = "index.html";
+                            //console.log(document.cookie);
+                            return true;
+                        } else if (data.status == "203") {
+                            alert("密码错误");
+                            return true;
+                        } else if (data.status == "202") {
+                            alert("该账号未注册");
+                            return true;
+                        }
+
+                    },
+                    error: function (result) {
+                        alert(result.status);
+                        console.log(result);
+                    }
+                })
+            } else {
+                alert("请阅读并同意软件许可服务协议");
+            }
+        });
+    };
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="author" content="m.178hui.com"/>
+    <meta name="applicable-device" content="mobile"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <title>搜索</title>
+    <link href="css/public.css" rel="stylesheet" type="text/css"/>
+    <link href="css/sousuo.css" rel="stylesheet" type="text/css"/>
+
+</head>
+
+<body>
+<div class="mobile">
+    <!--页面加载 开始-->
+    <div id="preloader">
+        <div id="status">
+            <p class="center-text"><span>拼命加载中···</span></p>
+        </div>
+    </div>
+    <!--页面加载 结束-->
+    <!--header 开始-->
+    <header>
+        <div class="header">
+            <a class="new-a-back" href="javascript:history.back();">
+                <span><img src="images/iconfont-fanhui.png"></span>
+            </a>
+
+            <p class="center">
+                <!--<i class="photo"></i>-->
+                <input name="name" type="text" class="search_input" id="button" placeholder="请输入商城名称"/>
+                <input type="button" name="button" value="搜索" class="photo" onclick="print()"/>
+            </p>
+
+            <!--<p class="right" id="searchInput">搜索</p>-->
+
+
+        </div>
+    </header>
+    <!--header 结束-->
+    <div class="m_mall s">
+        <div class="mall_title"><span>热门推荐</span></div>
+        <div class="outer" id="outer">
+
+        </div>
+    </div>
+
+    <div class="m_mall w">
+        <div class="mall_title"><span>分类筛选</span></div>
+        <div class="mall_list">
+            <a href="fenlei.html#Digital" class="mall">
+                <div class="mall_logo"><img src="images/icon/icon_diannaoshuma.png" style="width:80px"/></div>
+                <span>电脑数码</span></a>
+            <a href="fenlei.html#electrical" class="mall">
+                <div class="mall_logo"><img src="images/icon/icon_jiayongdianqi.png" style="width:80px"/></div>
+                <span>家用电器</span></a>
+            <a href="fenlei.html#motion" class="mall">
+                <div class="mall_logo"><img src="images/icon/icon_yundonghuwai.png" style="width:80px"/></div>
+                <span>运动户外</span></a>
+            <a href="fenlei.html#automobile" class="mall" style="border-right:none;">
+                <div class="mall_logo"><img src="images/icon/icon_qicheyongpin.png"
+                                            style="width:80px;border-right:none;"/></div>
+                <span>汽车用品</span></a>
+        </div>
+    </div>
+
+    <div class="m_mall w">
+        <div class="mall_title"><span>商城筛选</span></div>
+        <div class="mall_list">
+            <a href="#" class="mall">
+                <div class="mall_logos"><img src="images/pingtai/picture-taobao.png"/></div>
+            </a>
+            <a href="#" class="mall">
+                <div class="mall_logos"><img src="images/pingtai/picture-jingdong.png"/></div>
+            </a>
+            <a href="#" class="mall">
+                <div class="mall_logos"><img src="images/pingtai/picture-dangdang.png"/></div>
+            </a>
+            <a href="#" class="mall" style="border-right:none;">
+                <div class="mall_logos"><img src="images/pingtai/picture-guomei.png"/></div>
+            </a>
+            <a href="#" class="mall">
+                <div class="mall_logos"><img src="images/pingtai/picture-jvhuasuan.png"/></div>
+            </a>
+            <a href="#" class="mall">
+                <div class="mall_logos"><img src="images/pingtai/picture-jvmeiyoupin.png"/></div>
+            </a>
+            <a href="#" class="mall">
+                <div class="mall_logos"><img src="images/pingtai/picture-kaola.png"/></div>
+            </a>
+            <a href="#" class="mall" style="border-right:none;">
+                <div class="mall_logos"><img src="images/pingtai/picture-mogujie.png"/></div>
+            </a>
+            <a href="#" class="mall">
+                <div class="mall_logos"><img src="images/pingtai/picture-suning.png"/></div>
+            </a>
+            <a href="#" class="mall">
+                <div class="mall_logos"><img src="images/pingtai/picture-weipinhui.png"/></div>
+            </a>
+            <a href="#" class="mall">
+                <div class="mall_logos"><img src="images/pingtai/picture-xiaomi.png"/></div>
+            </a>
+            <a href="#" class="mall" style="border-right:none;">
+                <div class="mall_logos"><img src="images/pingtai/picture-yamaxun.png"/></div>
+            </a>
+            <a href="#" class="mall">
+                <div class="mall_logos"><img src="images/pingtai/picture-yihaodian.png"/></div>
+            </a>
+            <a href="#" class="mall">
+                <div class="mall_logos"><img src="images/pingtai/picture-yintai.png"/></div>
+            </a>
+        </div>
+    </div>
+
+    <div class="m_user w">
+        <a href="login.html">登录</a>
+        <a href="register.html">注册</a>
+        <a href="#">返回顶部</a>
+    </div>
+    <div class="footer w">
+        <a href="#">
+            <div class="ico_img"><img src="images/178hui-app.png"></div>
+            <span style="color:#00bb9c">客户端</span></a>
+        <a href="index.html">
+            <div class="ico_img"><img src="images/178hui-shouji.png"></div>
+            <span style="color:#eb4f38">触摸版</span></a>
+        <a href="#">
+            <div class="ico_img"><img src="images/178hui-diannao.png"></div>
+            <span>电脑版</span></a>
+    </div>
+    <div class="copyright">Copyright © 2012-2015 一起惠返利网 m.178hui.com 版权所有</div>
+</div>
+<script src="js/jquery-1.8.3.min.js"></script>
+<script>
+    //推荐部分页面跳转
+    function setEvent() {
+        var bOuter = document.getElementById("outer");
+        var aa = document.getElementsByClassName("layout");
+        for (var i = 0; i < aa.length; i++) {
+            var cur = aa[i];
+            cur.addEventListener("click", handleMouse);
+        }
+    }
+    function handleMouse(event) {
+        var str = event.target.innerHTML;
+        //存储
+        localStorage.setItem("input", str);
+        //跳转
+        location.href = "search.html";
+    }
+    // 顶部搜索框   跳转到搜索到对应的页面
+    function print() {
+        var aButton = document.getElementById("button").value;
+        if (aButton != '') {
+            //本地存储 key
+            localStorage.setItem("input", aButton);
+            //跳转
+            window.location.href = "search.html";
+        }
+    }
+    //
+    $(window).load(function () {
+        $("#status").fadeOut();
+        $("#preloader").delay(350).fadeOut("slow");
+
+//热门推荐接口
+        $.ajax({
+            type: 'get',
+            url: 'http://112.17.250.169:8088/index.php/home/search/recommend',
+            async: false,
+            cache: false,
+            data: {
+                userid: localStorage.getItem("userid"),
+                kingkey: localStorage.getItem("kingkey")
+
+            },
+            dataType: "json",
+            success: function (data) {
+                if (data.status == 100) {
+                    //热门推荐的数据
+                    var aOuter = document.getElementById("outer");
+                    var str = '';
+                    for (var i = 0; i < data.result.length; i++) {
+                        var cur = data.result[i];
+                        str += "<a  class='layout'>" + cur.name + "</a>";
+                    }
+                    aOuter.innerHTML = str;
+                    setEvent();
+                    //alert('请求成功');
+
+                } else if (data.status == 101) {
+                    alert('动态密码错误');
+                }
+
+            }
+        })
+    })
+
+
+</script>
+
+</body>
+</html>

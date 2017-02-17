@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="author" content="m.178hui.com"/>
+    <meta name="applicable-device" content="mobile"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <title>天猫精品旗舰店</title>
+    <link href="css/public.css" rel="stylesheet" type="text/css"/>
+    <link href="css/top.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body>
+<div class="mobile">
+    <!--页面加载 开始-->
+    <div id="preloader">
+        <div id="status">
+            <p class="center-text"><span>拼命加载中···</span></p>
+        </div>
+    </div>
+    <!--页面加载 结束-->
+    <!--header 开始-->
+    <header>
+        <div class="header">
+            <a class="new-a-back" href="index.html">
+                <span><img src="images/iconfont-fanhui.png"></span>
+            </a>
+
+            <h2>天猫精品旗舰店</h2>
+
+        </div>
+    </header>
+    <!--header 结束-->
+
+    <div class="qijian w">
+        <nav id="qijian-tab" class="clear">
+
+            <ul id="tabs" class="clear">
+                <li style="display: none"></li>
+                <li><a class="current" href="#">电脑数码</a></li>
+                <li><a href="#">家用电器</a></li>
+                <li><a href="#">汽车用品</a></li>
+                <li><a href="#">运动户外</a></li>
+            </ul>
+            <span id="indicator"></span>
+        </nav>
+        <div id="content">
+            <!-- <section id="qj_dnsm">
+                 &lt;!&ndash; <a class="qjd" href="baoliao_view.html">
+                     <h3>飞利浦天猫旗舰店</h3>
+                     <div class="qjd_img"><img src="__PUBLIC__/images/test-banner4.png" /></div>
+                     <div class="fgx"><img src="__PUBLIC__/images/top10/top-fengexian.png" /></div>
+                 </a>&ndash;&gt;
+
+
+             </section>-->
+
+
+        </div>
+    </div>
+
+
+</div>
+<!--end//Mobil-->
+
+<script src="js/jquery-1.8.3.min.js"></script>
+
+<!--<script type="text/javascript" src="js/jquery.tools.min.js"></script>&lt;!&ndash;选项卡&ndash;&gt;
+<script type="text/javascript" src="js/jquery.easing.1.3.js"></script>&lt;!&ndash;选项卡&ndash;&gt;-->
+<script type="text/javascript">
+    $(window).load(function () {
+        $("#status").fadeOut();
+        $("#preloader").delay(350).fadeOut("slow");
+    })
+    //首页 天猫旗舰店
+    function qjList(page) {
+
+        $.ajax({
+            type: 'get',
+            url: 'http://112.17.250.169:8088/index.php/home/Homepagetmall/computer',
+            async: false,
+            cache: false,
+            data: {
+                userid: localStorage.getItem("userid"),
+                kingkey: localStorage.getItem("kingkey"),
+                type: 1,
+                page: page
+            },
+            dataType: "json",
+            success: function (data) {
+
+                //数据信息
+                function information() {
+                    //存储数据
+                    var aContent = document.getElementById("content");
+                    var str = "";
+                    var list = [];
+                    if (page) {
+                        //如果页数不为空,就拿,然后拼接
+                        str = aContent.innerHTML;
+                        //如果不为空,说明本地数组不为空,就拿出来追加
+                        var strList = localStorage.getItem("qiJianList");
+                        list = JSON.parse(strList);
+                    }
+                    list = list.concat(data.result);
+                    var strList = JSON.stringify(list);//转化成字符串进行保存
+                    localStorage.setItem("qiJianList", strList);
+                    for (var i = 0; i < data.result.length; i++) {
+                        var cur = data.result[i];
+
+                        str += " <a class='qjd' href='baoliao_view.html'><h3>" + cur.title + "</h3><div class='qjd_img'><img src=" + cur.image + " /></div>";
+                        str += "<div class='fgx'><img src='images/top10/top-fengexian.png' /></div></a>";
+
+                    }
+                    aContent.innerHTML = str;
+                }
+
+                if (data.status == "100") {
+                    information();
+                    return true;
+                } else if (data.status == "101") {
+                    alert("动态密码错误");
+                    return true;
+                } else if (data.status == "102") {
+                    information();
+                    return true;
+                } else if (data.status == "103") {
+                    alert("没有最新数据");
+                    return true;
+                } else if (data.status == "104") {
+                    alert("没有下一页了");
+                    return true;
+                }
+            },
+            error: function (result) {
+                alert(result.status);
+                console.log(result);
+            }
+
+        })
+    }
+    //首页 天猫旗舰店 电脑数码，家用电器, 汽车用品，运动户外
+    function mostList(page) {
+        var aTabs = document.getElementById('tabs');
+        var aLi = aTabs.getElementsByTagName('li');
+        for (var i = 1; i <= aLi.length; ++i) {
+            (function (n) {
+                aLi[n].onclick = function () {
+                    alert("onclick");
+                    $.ajax({
+                        type: 'get',
+                        url: 'http://112.17.250.169:8088/index.php/home/Homepagetmall/computer',
+                        async: false,
+                        cache: false,
+                        data: {
+                            userid: localStorage.getItem("userid"),
+                            kingkey: localStorage.getItem("kingkey"),
+                            type: n,
+                            page: page
+                        },
+                        dataType: "json",
+                        success: function (data) {
+                            //数据信息
+                            //alert("success");
+                            function information() {
+                                //存储数据
+                                var aContent = document.getElementById("content");
+                                var str = "";
+                                var list = [];
+                                if (page) {
+                                    //如果页数不为空,就拿,然后拼接
+                                    str = aContent.innerHTML;
+                                    //如果不为空,说明本地数组不为空,就拿出来追加
+                                    var strList = localStorage.getItem("qiJianList");
+                                    list = JSON.parse(strList);
+                                }
+                                list = list.concat(data.result);
+                                var strList = JSON.stringify(list);//转化成字符串进行保存
+                                localStorage.setItem("qiJianList", strList);
+                                for (var i = 0; i < data.result.length; i++) {
+                                    var cur = data.result[i];
+
+                                    str += " <a class='qjd' href='baoliao_view.html'><h3>" + cur.title + "</h3><div class='qjd_img'><img src=" + cur.image + " /></div>";
+                                    str += "<div class='fgx'><img src='images/top10/top-fengexian.png' /></div></a>";
+
+                                }
+                                aContent.innerHTML = str;
+                            }
+
+                            if (data.status == "100") {
+                                information();
+                                return true;
+                            } else if (data.status == "101") {
+                                alert("动态密码错误");
+                                return true;
+                            } else if (data.status == "102") {
+                                information();
+                                return true;
+                            } else if (data.status == "103") {
+                                alert("没有最新数据");
+                                return true;
+                            } else if (data.status == "104") {
+                                alert("没有下一页了");
+                                return true;
+                            }
+
+                        },
+                        error: function (result) {
+                            alert(result.status);
+                            console.log(result);
+                        }
+                    })
+                }
+            })(i)
+
+        }
+    }
+    //返回顶部
+    $(document).ready(function () {
+        $(window).scroll(function () {
+            var scrollHeight = $(document).height();//总体高度
+            var scrollTop = $(window).scrollTop();//滚动,顶部距离顶部高度
+            var windowHeight = $(window).innerHeight();//屏幕高度
+            var scrollBtm = scrollTop + 736;//滚动,底部距离顶部高度
+            //底部导航栏 高度 50px
+            var divHeight = $("#content").innerHeight();//滚动部分的总体高度
+
+            //console.log(scrollHeight, windowHeight, divHeight + 50, scrollBtm);
+
+            if (scrollBtm >= scrollHeight) {
+                //拿到最后一个ID
+                var strList = localStorage.getItem("qiJianList");
+                var list = JSON.parse(strList);
+                //请求下一页
+                qjList(list[list.length - 1].tid) || mostList(list[list.length - 1].tid);
+            }
+            scrollTop > 75 ? $(".gotop").fadeIn(200).css("display", "block") : $(".gotop").fadeOut(200).css({"background-image": "url(images/iconfont-fanhuidingbu.png)"});
+        });
+
+        $('.backtop').click(function (e) {
+            $(".gotop").css({"background-image": "url(images/iconfont-fanhuidingbu_up.png)"});
+            e.preventDefault();
+            $('html,body').animate({scrollTop: 0});
+        });
+    });
+    //请求接口
+    window.onload = function () {
+        //请求接口
+        qjList();
+        mostList();
+    };
+
+</script>
+</body>
+</html>

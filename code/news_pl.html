@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="author" content="m.178hui.com"/>
+    <meta name="applicable-device" content="mobile"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <title>消息-评论</title>
+    <link href="css/public.css" rel="stylesheet" type="text/css"/>
+    <link href="css/frozen.css" rel="stylesheet" type="text/css"/>
+    <link href="css/news.css" rel="stylesheet" type="text/css"/>
+
+</head>
+
+<body>
+<div class="mobile">
+    <!--页面加载 开始-->
+    <div id="preloader">
+        <div id="status">
+            <p class="center-text"><span>拼命加载中···</span></p>
+        </div>
+    </div>
+    <!--页面加载 结束-->
+    <!--header 开始-->
+    <header>
+        <div class="header"><a class="new-a-back" href="javascript:history.back();"> <span><img
+                src="images/iconfont-fanhui.png"></span> </a>
+
+            <h2>评论</h2>
+        </div>
+    </header>
+    <!--header 结束-->
+
+
+    <div id="pinglun">
+        <!--<div class="news_index w">
+            <ul class="ui-list ui-border-tb">
+                <a href="#">
+                    <div class="xiaoxi_content">
+                        <div class="xx_img"><img src="images/icon/user-logo.png" /></div>
+                        <div class="xx_right">
+                            <div class="xx_user">姐是老中医</div>
+                            <div class="xx_time">09-28 20:27</div>
+                        </div>
+                        <div class="xx_nr"> adadadada</div>
+                        <div class="xx_zznr">
+                            <a href="#">
+                                <li>
+                                    <div class="xx_zznr_left">
+                                        <div class="xx_img"><img src="images/user_logo.jpg" /></div>
+                                    </div>
+                                    <div class="xx_zznr_info">
+                                        <div class="xx_user">姐是老中医</div>
+                                        <div class="xx_nrr">lal啦啦啦alalalla</div>
+                                    </div>
+                                </li>
+                            </a>
+                        </div>
+                    </div>
+                </a>
+            </ul>
+        </div>-->
+    </div>
+
+
+    <div class="copyright">Copyright © 2016- 诚品会 版权所有</div>
+</div>
+<script src="js/jquery-1.8.3.min.js"></script>
+<script>
+    $(window).load(function () {
+        $("#status").fadeOut();
+        $("#preloader").delay(350).fadeOut("slow");
+    })
+
+
+    //评论消息接口
+    $.ajax({
+        type: "get",
+        url: "http://112.17.250.169:8088/index.php/home/Inforcommentdetails/comment",
+        async: false,
+        cache: false,//在url后面拼接一个随机数清除get缓存
+        data: {
+            userid: localStorage.getItem("userid"),
+            kingkey: localStorage.getItem("kingkey")
+        },
+        dataType: "json",
+        success: function (data) {
+            console.log(data);
+            if (data.status == "100") {
+                //分类详情里面的商品列表
+                var aPingLun = document.getElementById("pinglun");
+                var str = "";
+                for (var i = 0; i < data.result.length; i++) {
+                    var cur = data.result[i];
+
+                    str += "<div class='news_index w '>"
+                    str += "<ul class='ui-list ui-border-tb'>";
+
+                    str += "<div class='boxxiao'><div class='xiaoxi_content'><div class='xx_img'>";
+                    str += " <img src=" + cur.imgurl + "  /></div>";//
+                    str += "<div class='xx_right'><div class='xx_user'>" + cur.title + "</div>";//
+                    str += "<div class='xx_time'>" + cur.coaddtime + "</div></div></div>";
+
+
+                    str += "<div class='xx_nr'>" + cur.content + "</div>";
+                    str += "<div class='xx_zznr'><a href='#'>";
+                    str += "<li><div class='xx_zznr_left'><div class='xx_img'>";
+                    str += "<img src=" + cur.images + "  /></div></div>";
+                    str += "<div class='xx_zznr_info'><div class='xx_user'>" + cur.cocontent + "</div>";
+                    str += "<div class='xx_nrr'>" + cur.brief + "</div>";
+
+                    str += " </div></li></a></div> </div></ul></div>";
+
+                }
+                aPingLun.innerHTML = str;
+                return true;
+            } else if (data.status == "101") {
+                alert("动态密码错误");
+            }
+        },
+        error: function (result) {
+            alert(result.status);
+            console.log(result);
+        }
+    })
+
+</script>
+
+
+</body>
+</html>

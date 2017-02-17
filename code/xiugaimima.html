@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>诚品会wap注册</title>
+    <link href="css/owl.carousel.css" rel="stylesheet">
+    <link href="css/public.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="css/zhuce.css"/>
+
+</head>
+
+<body style="background-color:#F6F6F6">
+<div class="mobile">
+    <div class="header">
+        <div class="top-header">
+            <div class="m_search">
+                <a href="#"><img src="images/iconfont-fanhui.png" width="20"></a>
+            </div>
+            <div class="m_name">
+                <a href="#">修改密码</a>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="top w">
+        <div class="m_banner">
+            <form target="_blank" id="ff" method="post">
+                <input type="phone" placeholder="| 手机号：" class="log_form_phone" name="tel" id="tel"><br>
+                <input placeholder="| 验证码" class="log_form_psd" name="code" id="code">
+                <i class="pass" id="sub">点击获取验证码</i>
+                <br>
+                <input type="password" placeholder="| 密码（大于6位的数字和字母）" class="log_form_psd1" id="password"
+                       name="password">
+                <i class="passa" id="passa"></i>
+                <br>
+                <a class="log_form_btn" id="form_login_submite">提交</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="js/jquery-1.8.3.min.js"></script>
+<script src="js/jquery-1.11.3.js"></script>
+
+<script type="text/javascript">
+
+    //短信验证接口
+    window.onload = function () {
+        var flag = true;
+        $('#passa').on('click', function () {
+            if (flag) {
+                $('input').attr('type', 'text');
+                flag = false
+            } else {
+                $('input').attr('type', 'password');
+                flag = true
+            }
+        });
+        $("#sub").click(function () {
+            var num = document.getElementById('tel').value;
+            if (!(/^1(3|4|5|7|8)\d{9}$/.test(num))) {
+                alert("手机号码有误，请重填");
+                return false;
+            }
+            $.ajax({
+                type: "post",
+                url: "http://112.17.250.169:8088/index.php/home/Noteapi/gain",
+                async: false,
+                data: $('#ff').serialize(),
+                dataType: "json",
+                success: function (data) {
+                    if (data.status == "300") {
+                        //alert("成功");
+                        return true;
+                    } else if (data.status == "301") {
+                        alert("失败");
+                        return true;
+                    }
+                },
+                error: function (result) {
+                    alert(result.status);
+                    console.log(result);
+                }
+            })
+        });
+        $("#form_login_submite").click(function () {
+            var tel = $('#tel').val();
+            var password = $('#password').val();
+            var code = $('#code').val();
+            //修改密码接口
+            $.ajax({
+                type: "post",
+                url: "http://112.17.250.169:8088/index.php/home/Uprecord/uprecord",
+                async: false,
+                data: {
+                    userid: localStorage.getItem("userid"),
+                    kingkey: localStorage.getItem("kingkey"),
+                    tel: tel,
+                    password: password,
+                    code: code
+                },
+                dataType: "json",
+                success: function (data) {
+                    if (data.status == "400") {
+                        location.href = "user_shezhi.html";
+                        //alert("修改成功");
+                        return true;
+                    } else if (data.status == "401") {
+                        // location.href = "{:U('Title/index')}";
+                        alert("修改失败");
+                        return true;
+                    } else if (data.status == "303") {
+                        alert("验证码过期");
+                        return true;
+                    } else if (data.status == "304") {
+                        alert("验证码错误");
+                        return true;
+                    }
+                },
+                error: function (result) {
+                    alert(111)
+                    alert(result.status);
+
+                }
+            })
+        })
+    }
+
+
+</script>
+
+</body>
+</html>

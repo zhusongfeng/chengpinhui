@@ -1,0 +1,146 @@
+@charset "utf-8";
+/*--顶部--*/
+.header .top-header .m_search {
+    float: left;
+    height: 30px;
+    margin-top: 8px;
+    margin-left: 15px;
+}
+.header .top-header .m_name ,.header .top-header .m_news{
+    text-align: center;
+    font-size: 1.8em;
+    text-decoration: none;
+    margin-right: 15px;
+    margin-top: 15px;
+}
+.header .top-header .m_name a ,.header .top-header .m_news a{
+    text-align: center;
+    vertical-align: middle;
+    color: #fff;
+    font-size: 0.8em;
+    text-decoration: none;
+    margin-top: 18px;
+}
+.header .top-header .m_news{
+    text-align: right;
+    margin-top: -32px;
+    margin-right: 15px;
+    margin-bottom: 10px;
+}
+
+/*--end//顶部--*/
+.clear:before, .clear:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+.top {
+    margin-top: 8%;
+    margin-bottom: 33px;
+    margin-left: -5px;
+    width: 100%;
+    min-width: 320px;
+}
+
+.top .m_banner {
+    width: 100%;
+    max-width: 640px;
+    max-height: 310px;
+    overflow: hidden;
+    background-size: contain;
+    margin-top: 40px;
+    margin-bottom: -250px;
+}
+.log_form_phone, .log_form_psd1 {
+    width: 90%;
+    height: 38px;
+    border: 1px solid #d8d9dc;
+    padding-left: 58px;
+    line-height: 30px;
+    margin-left: 9px;
+    background-color: white;
+    font-size: 16px;
+    outline: none;
+    margin-bottom: 10px ;
+}
+.log_form_phone{
+    margin-bottom: -30px ;
+}
+.passa:hover{
+    background: #fff url(../images/icon/icon-yan1.png) no-repeat 5px center;
+    background-size: 25px;
+}
+
+.log_form_btn {
+    display: block;
+    width: 280px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    color: #fff;
+    background: red;
+    font-size: 20px;
+    letter-spacing: 10px;
+    margin:14px  auto;
+    border-radius: 5px;
+    text-decoration: none;
+}
+.passa{
+    background: #fff url(../images/icon/icon-yan.png) no-repeat 5px center;
+    background-size: 25px;
+    display: inline-block;
+    width: 40px;
+    height: 38px;
+    float: right;
+    position: relative;
+    right: 16px;
+    bottom: 50px;
+}
+.log_form_psd1{
+    margin-top: -20px;
+}
+.password,.phonePassword{
+    background-size: 25px;
+    display: inline-block;
+    width: 40px;
+    height: 38px;
+    float: left;
+    position: relative;
+    left: 15px;
+    bottom: 43px;
+    color: red;
+    font-size: 20px;
+    font-style: normal;
+}
+.password{
+    bottom: 22px;
+}
+p{
+    float: right;
+    width: 80px;
+    height: 20px;
+}
+p a{
+    font-size: 16px;
+    color: #303030;
+}
+.bottom{
+    width: 291px;
+    height: 20px;
+    margin: auto;
+    position: relative;
+    top: 268px;
+    vertical-align: middle;
+}
+.bottom input{
+    font-size: 14px;
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+}
+.write{
+    display: inline-block;
+    color: red;
+    font-style: normal;
+    margin-left: 6px;
+}

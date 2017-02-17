@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>诚品会wap测评</title>
+    <!-- 外部样式链接 -->
+    <link href="css/owl.carousel.css" rel="stylesheet">
+    <link href="css/public.css" rel="stylesheet" type="text/css"/>
+    <link href="css/ceping.css" rel="stylesheet" type="text/css"/>
+
+</head>
+<body style="background-color: #ffffff">
+<div class="mobile">
+    <!--顶部导航-->
+    <header>
+        <div class="header"><a class="new-a-back" href="javascript:history.back();"> <span><img
+                src="images/iconfont-fanhui.png"></span> </a>
+            <h2>我的测评</h2>
+        </div>
+    </header>
+
+
+    <!--列表信息-->
+
+    <div class="top w" id="div">
+    </div>
+
+    <!--底部版权声明-->
+    <div class="copyright">Copyright © 2016- 诚品会 版权所有</div>
+    <div class="gotop backtop" style="display:none;"></div><!--返回顶部-->
+
+    <!--底部导航-->
+    <div class="uder-nav">
+        <ul>
+            <li id="cph">
+                <div class="cph1"><a href="index.html">诚品会</a></div>
+            </li>
+            <li id="fl">
+                <div class="fl1"><a href="fenlei.html">分类</a></div>
+            </li>
+            <li id="cp">
+                <div class="cp1"><a href="#">测评</a></div>
+            </li>
+            <li id="zt">
+                <div class="zt1"><a href="zhuanti.html">专题</a></div>
+            </li>
+            <li id="wd">
+                <div class="wd1"><a href="user.html">我的</a></div>
+            </li>
+        </ul>
+    </div>
+
+</div><!--end//Mobil-->
+
+<!--脚本-->
+<script src="js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript">
+    //请求列表的方法
+    function cpList(page) {
+        alert(page)
+        //请求接口
+        $.ajax({
+            type: "get",
+            url: "http://112.17.250.169:8088/index.php/home/Myevaluation/evaluationData",
+            async: false,
+
+            cache: false,//在url后面拼接一个随机数清除get缓存
+            data: {
+                userid: localStorage.getItem("userid"),
+                kingkey: localStorage.getItem("kingkey"),
+                page: page,
+            },
+            dataType: "json",
+            success: function (data) {
+                if (data.status == "100") {
+
+                    //存储数据
+                    var aDiv = document.getElementById("div");
+                    var str = "";
+                    var list =[];
+                    if (page) {
+                        //如果页数不为空,就拿,然后拼接
+                        str = aDiv.innerHTML;
+                        //如果不为空,说明本地数组不为空,就拿出来追加
+                        var  strList = localStorage.getItem("user_ceping_list");
+                        list=JSON.parse(strList);
+                    }
+                    list = list.concat(data.result);
+                    var strList = JSON.stringify(list);//转化成字符串进行保存
+                    localStorage.setItem("user_ceping_list",strList);
+                    console.log(list.length);
+
+                    for (var i = 0; i < data.result.length; i++) {
+                        /* (function(n){*/
+                        var cur = data.result[i];
+                        data.result[i].index = i;
+                        str += "<div class='m_banner'>";
+                        str += "<a href='#' class='item'><img src=" + cur.images + "  trueImg=" + cur.images + "/></a>";//logo  图片
+                        str += "<p ><span class='left' >" + cur.title + "</span><span class='right' value=' " + (cur.eid) + " '><i>" + cur.likenum + "</i></span></p>";
+                        str += "</div>";
+
+                    }
+                    ;
+                    aDiv.innerHTML = str;
+                } else if (data.status == "101") {
+                    alert("动态密码错误");
+                    return true;
+                } else if (data.status == "105") {
+                    alert("暂无数据");
+                    return true;
+                }
+            },
+            error: function (result) {
+                alert(result.status);
+                console.log(result);
+            }
+        });
+
+    };
+    //返回顶部
+    $(document).ready(function () {
+//        监听滚动
+        $(window).scroll(function () {
+            var scrollHeight = $(document).height();//总体高度
+            var scrollTop = $(window).scrollTop();//滚动,顶部距离顶部高度
+            var windowHeight = $(window).innerHeight();//屏幕高度
+            var scrollBtm = scrollTop + windowHeight;//滚动,底部距离顶部高度
+            //底部导航栏 高度 50px
+            var divHeight = $("#div").innerHeight();//滚动部分的总体高度
+
+            //console.log(scrollHeight, windowHeight, divHeight + 50, scrollBtm);
+
+            if (scrollBtm >= scrollHeight) {
+                //拿到最后一个ID
+                var  strList = localStorage.getItem("user_ceping_list");
+                 var list=JSON.parse(strList);
+                //请求下一页 这里没有下一页
+
+               // cpList(list[list.length-1].eid);
+            }
+            scrollTop > 75 ? $(".gotop").fadeIn(200).css("display", "block") : $(".gotop").fadeOut(200).css({"background-image": "url(images/iconfont-fanhuidingbu.png)"});
+        });
+        $('.backtop').click(function (e) {
+            $(".gotop").css({"background-image": "url(images/iconfont-fanhuidingbu_up.png)"});
+            e.preventDefault();
+            $('html,body').animate({scrollTop: 0});
+        });
+    });
+    //注册事件
+    window.onload = function () {
+        //请求接口
+        cpList();
+    };
+    $("#div .right:nth-child(i)").live("click", function () {
+        $.ajax({
+            type: "get",
+            url: "http://112.17.250.169:8088/index.php/home/Evaluationlike/evaluationLike",
+            data: {
+                userid: localStorage.getItem("userid"),
+                kingkey: localStorage.getItem("kingkey"),
+                evaluation_id: $(".right").attr("value")
+            },
+            async: false,
+            cache: false,//在url后面拼接一个随机数清除get缓存
+            dataType: "json",
+            success: function (data) {
+
+                // console.log($(".right").attr("value"));
+                if (data.status == "101") {
+                    alert("动态密码错误");
+                    return true;
+                } else if (data.status == "106") {
+
+                    alert("点赞成功");
+                    return true;
+                } else if (data.status == "107") {
+                    alert("取消点赞成功");
+                    return true;
+                } else if (data.status == "108") {
+                    alert("点赞失败");
+                    return true;
+                } else if (data.status == "109") {
+                    alert("取消点赞失败");
+                    return true;
+                }
+            },
+            error: function (result) {
+                alert(11);
+                console.log(result);
+            }
+        })
+    });
+    /*  }*/
+
+
+</script>
+</body>
+</html>
